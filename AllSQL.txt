@@ -1,0 +1,203 @@
+CREATE DATABASE `computershop` /*!40100 COLLATE 'utf8_general_ci' */;
+
+USE `computershop`;
+
+CREATE TABLE `product` (
+	`maker` VARCHAR(10) NOT NULL,
+	`model` VARCHAR(50) NOT NULL,
+	`type` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`model`)
+)
+COLLATE='utf8_general_ci'
+;
+
+
+CREATE TABLE `laptop` (
+	`code` INT NOT NULL AUTO_INCREMENT,
+	`model` VARCHAR(50) NOT NULL,
+	`speed` SMALLINT NOT NULL,
+	`ram` SMALLINT NOT NULL,
+	`hd` DECIMAL(3,1) NOT NULL,
+	`price` DOUBLE NOT NULL,
+	`screen` TINYINT NOT NULL,
+	PRIMARY KEY (`code`)
+)
+COLLATE='utf8_general_ci'
+;
+ALTER TABLE `laptop`
+	ADD CONSTRAINT `FK_laptop_product` FOREIGN KEY (`model`) REFERENCES `product` (`model`);
+
+
+CREATE TABLE `pc` (
+	`code` INT NOT NULL AUTO_INCREMENT,
+	`model` VARCHAR(50) NOT NULL,
+	`speed` SMALLINT NOT NULL,
+	`ram` SMALLINT NOT NULL,
+	`hd` DECIMAL(3,1) NOT NULL,
+	`cd` VARCHAR(10) NOT NULL,
+	`price` DOUBLE NOT NULL,
+	PRIMARY KEY (`code`)
+)
+COLLATE='utf8_general_ci'
+;
+ALTER TABLE `pc`
+	ADD CONSTRAINT `FK_pc_product` FOREIGN KEY (`model`) REFERENCES `product` (`model`);
+
+
+CREATE TABLE `printer` (
+	`code` INT NOT NULL AUTO_INCREMENT,
+	`model` VARCHAR(50) NULL,
+	`color` CHAR(1) NULL,
+	`type` VARCHAR(10) NULL,
+	`price` DOUBLE NULL,
+	PRIMARY KEY (`code`)
+)
+COLLATE='utf8_general_ci'
+;
+ALTER TABLE `printer`
+	ADD CONSTRAINT `FK_printer_product` FOREIGN KEY (`model`) REFERENCES `product` (`model`);
+
+
+
+
+/* FIRST, POPULATE TABLE PRODUCT, THEN OTHER TABLES */
+
+USE `computershop`;
+
+INSERT INTO product( maker, model, type )
+values ("A", "1232", "PC");
+
+INSERT INTO product( maker, model, type )
+values ("A", "1233", "PC");
+
+INSERT INTO product( maker, model, type )
+values ("A", "1276", "Printer");
+
+INSERT INTO product( maker, model, type )
+values ("A", "1298", "Laptop");
+
+INSERT INTO product( maker, model, type )
+values ("A", "1401", "Printer");
+
+INSERT INTO product( maker, model, type )
+values ("A", "1408", "Printer");
+
+INSERT INTO product( maker, model, type )
+values ("A", "1752", "Laptop");
+
+INSERT INTO product( maker, model, type )
+values ("B", "1121", "PC");
+
+INSERT INTO product( maker, model, type )
+values ("B", "1750", "Laptop");
+
+INSERT INTO product( maker, model, type )
+values ("C", "1321", "Laptop");
+
+INSERT INTO product( maker, model, type )
+values ("D", "1288", "Printer");
+
+INSERT INTO product( maker, model, type )
+values ("D", "1433", "Printer");
+
+INSERT INTO product( maker, model, type )
+values ("E", "1260", "PC");
+
+INSERT INTO product( maker, model, type )
+values ("E", "1434", "Printer");
+
+INSERT INTO product( maker, model, type )
+values ("E", "2112", "PC");
+
+INSERT INTO product( maker, model, type )
+values ("E", "2113", "PC");
+
+
+/* POPULATE TABLE PC */
+
+USE `computershop`;
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1232", 500, 64, 5.0, "12x", 600.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1121", 750, 128, 14.0, "40x", 850.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1233", 500, 64, 5.0, "12x", 600.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1121", 600, 128, 14.0, "40x", 850.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1121", 600, 128, 8.0, "40x", 850.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1233", 750, 128, 20.0, "50x", 950.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1232", 500, 32, 10.0, "12x", 400.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1232", 450, 64, 8.0, "24x", 350.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1232", 450, 32, 10.0, "24x", 350.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1260", 500, 32, 10.0, "12x", 350.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1233", 900, 128, 40.0, "40x", 980.0000 );
+
+INSERT INTO pc( model, speed, ram, hd, cd, price )
+VALUES( "1233", 800, 128, 20.0, "50x", 970.0000 );
+
+
+
+/* POPULATE TABLE PRINTER */
+
+USE `computershop`;
+
+INSERT INTO printer( model, color, type, price )
+VALUES( "1276", 'n', "Laser", 400.0000 );
+
+INSERT INTO printer( model, color, type, price )
+VALUES( "1433", 'y', "Jet", 270.0000 );
+
+INSERT INTO printer( model, color, type, price )
+VALUES( "1434", 'y', "Jet", 290.0000 );
+
+INSERT INTO printer( model, color, type, price )
+VALUES( "1401", 'n', "Matrix", 150.0000 );
+
+INSERT INTO printer( model, color, type, price )
+VALUES( "1408", 'n', "Matrix", 270.0000 );
+
+INSERT INTO printer( model, color, type, price )
+VALUES( "1288", 'n', "Laser", 400.0000 );
+
+
+
+
+/* POPULATE TABLE LAPTOP */
+
+USE `computershop`;
+
+INSERT INTO laptop( model, speed, ram, hd, price, screen )
+VALUES( "1298", 350, 32, 4.0, 700.0000, 11 );
+
+INSERT INTO laptop( model, speed, ram, hd, price, screen )
+VALUES( "1321", 500, 64, 8.0, 970.0000, 12 );
+
+INSERT INTO laptop( model, speed, ram, hd, price, screen )
+VALUES( "1750", 750, 128, 12.0, 1200.0000, 14 );
+
+INSERT INTO laptop( model, speed, ram, hd, price, screen )
+VALUES( "1298", 600, 64, 10.0, 1050.0000, 15 );
+
+INSERT INTO laptop( model, speed, ram, hd, price, screen )
+VALUES( "1752", 750, 128, 10.0, 1150.0000, 14 );
+
+INSERT INTO laptop( model, speed, ram, hd, price, screen )
+VALUES( "1298", 450, 64, 10.0, 950.0000, 12 );
